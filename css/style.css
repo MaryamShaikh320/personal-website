@@ -1,0 +1,54 @@
+:root {
+    
+}
+
+body {
+    background-color: #E9D7C3;
+    color: #241909;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: overlay;
+    font-family: 'Jura', sans-serif;
+}
+
+header {
+    background-color: #C2B0A1;
+    padding: 10px;
+    margin: 0   ;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 80px;
+    align-items: center;
+    padding: 0px 40px;
+}
+
+.site-name a {
+    text-decoration: none;
+    color:#241909;
+    font-size: 24px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color:#241909;
+    opacity: 0.6;
+    font-size: 20px;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}
