@@ -75,8 +75,9 @@ main {
 }
 
 .hero-container {
+    position: relative;
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     flex-direction: column;
     justify-content: center;
@@ -90,3 +91,41 @@ main {
     text-align: center;
 }
 
+.scroll-indicator {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 55px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+}
+
+.moving-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: scrollDown 2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+}
+
+@keyframes scrollDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+    20% {
+        opacity: 0.75;
+    }
+    80% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
