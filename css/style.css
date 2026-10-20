@@ -87,7 +87,7 @@ main {
 .hero-container {
     position: relative;
     display: flex;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 50px);
     width: 100%;
     flex-direction: column;
     justify-content: center;
@@ -156,6 +156,17 @@ main {
     justify-content: left;
     margin-left: 50px;
     margin-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
     flex-flow: row wrap;
+    border: 4px solid #C2B0A1;
+    border-radius: 8px;
 }
-
+.information .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10rem;
+}
