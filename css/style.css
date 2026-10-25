@@ -23,11 +23,7 @@ p.hero-section {
     font-size: 1.75rem;
 }
 
-p {
-    font-size: 1.5rem;
-}
-
-ul {
+p, ul, span {
     font-size: 1.5rem;
 }
 
@@ -159,7 +155,7 @@ main {
     display: flex;
     justify-content: center;
     gap: 1.9rem;
-    border: 0.2rem solid rgba(255, 255, 255, 0.8);
+    /* border: 0.2rem solid rgba(255, 255, 255, 0.8); */
 }
 
 .main-content {
@@ -174,7 +170,7 @@ main {
     display: grid;
     grid-template-columns: 6.25rem minmax(0, 1fr);
     gap: 2rem;
-    align-items: start;
+    align-items: center;
 }
 
 #timeline {
@@ -186,18 +182,17 @@ main {
 }
 
 .timeline-details {
-    min-height: 15.6rem;
-    padding: 1.5rem;
-    border: 0.06rem solid rgba(169, 199, 255, 0.25);
-    border-radius: 1rem;
-    background: rgba(85, 115, 146, 0.08);
-    box-sizing: border-box;
-}
-.timeline-details .placeholder-text {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 10rem;
+    height: 25rem;
+    width: 50rem;
+    overflow-y: auto;
+    padding: 1.5rem;
+    /* border: 0.06rem solid rgba(169, 199, 255, 0.25);
+    border-radius: 1rem;
+    background: rgba(85, 115, 146, 0.08); */
+    box-sizing: border-box;
 }
 
 .marker {
@@ -236,4 +231,40 @@ main {
 .marker:focus-visible {
     outline: 0.125rem solid #ffffff;
     outline-offset: 0.2rem;
+}
+
+
+@keyframes riseFadeIn {
+    from {
+        opacity: 0.1;
+        transform: translateY(var(--max-translation, 2rem));
+    }
+    to {
+        opacity: var(--max-opacity, 1);
+        transform: translateY(0);
+    }
+}
+
+.timeline-details h3,
+.timeline-details p {
+    animation: riseFadeIn 1s ease-in both;
+    color: #C4D2E1;
+}
+
+.timeline-details p {
+    animation-delay: 0.08s;
+}
+
+.timeline-details .placeholder-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 11rem;
+    --max-translation: 0;
+    --max-opacity: 0.5;
+    animation: riseFadeIn 1s ease-in both;
+    color: #C4D2E1;
+    /* border: 0.06rem solid rgba(169, 199, 255, 0.25);
+    border-radius: 1rem;
+    background: rgba(85, 115, 146, 0.08); */
 }
