@@ -175,10 +175,9 @@ main {
 
 #timeline {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3.75rem;
+    display: block;
+    width: 6.25rem;
+    overflow: visible;
 }
 
 .timeline-details {
@@ -196,6 +195,10 @@ main {
 }
 
 .marker {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
     width: 1rem;
     height: 1rem;
     padding: 0;
@@ -204,8 +207,6 @@ main {
     background: #557392;
     cursor: pointer;
     flex-shrink: 0;
-    position: relative;
-    z-index: 1;
 }
 
 #timeline::before {
@@ -224,7 +225,7 @@ main {
     background: #a9c7ff;
     border-color: #ffffff;
     box-shadow: 0 0 0.8rem #557392;
-    transform: scale(1.2);
+    transform: translateX(-50%) scale(1.2);
     transition: background 0.2 ease, border-color 0.2 ease, box-shadow 0.2 ease, transform 0.2 ease;
 }
 
@@ -253,6 +254,7 @@ main {
 
 .timeline-details p {
     animation-delay: 0.08s;
+    white-space: pre-line;
 }
 
 .timeline-details .placeholder-text {
@@ -267,4 +269,38 @@ main {
     /* border: 0.06rem solid rgba(169, 199, 255, 0.25);
     border-radius: 1rem;
     background: rgba(85, 115, 146, 0.08); */
+}
+
+#timeline-progress {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0.5rem;
+    height: 0;
+    transform: translateX(-50%);
+    background: #a9c7ff;
+    border-radius: 62rem;
+    box-shadow: 0 0 0.6rem #557392;
+    z-index: 1;
+    transition: height 0.8s ease;
+    pointer-events: none;
+}
+
+#timeline-present-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#timeline-present-label.is-lit {
+    color: #a9c7ff;
+    text-shadow: 0 0 0.6rem #557392;
 }

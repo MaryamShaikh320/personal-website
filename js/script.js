@@ -9,7 +9,7 @@ let selectedEvent = null;
 const eventInfo = {
     fll: {
         title: "FIRST Lego League Team ***",
-        description: "As a researcher, I worked on finding soltuion at the intersection of arts and technology. After gainging insights from meetings with specialists, out team presented our finalized idea to a panel of judges. Although we didn't win anything, this was my first introduction to researching and working with a team to ideate a viable product."
+        description: "As a researcher, I worked on finding soltuion at the intersection of arts and technology. After gainging insights from meetings with specialists, our team presented our finalized idea to a panel of judges. Although we didn't win anything, this was my first introduction to researching and working with a team to ideate a viable product."
     },
     vex: {
         title: "VEX IQ Robotics",
@@ -25,17 +25,89 @@ const eventInfo = {
     },
     hiset: {
         title: "Early Exit From High School",
-        description: `HiSET is a program that allows a student to skip the last 2 years of high school by assessing knowledge through 3 tests.
-        Math - 20/20
-        Reading - 17/20
-        Writing - 18/20`
+        description: "HiSET is a program that allows a student to skip the last 2 years of high school by assessing knowledge through 3 tests.\n\nMath - 20/20\nWriting - 18/20\nReading - 17/20"
 
     },
     deAnza: {
         title: "*** Community College",
-        description: "Enrolled at a local college to finish transfer coursework. Future coursework includes Calculus III-IV, Physics (Mechanics, Electricity and Magnetism, Fliuds, Waves, Optics, and Thermodynamics), Differential Equations, Linear Alegbra, Discrete, Circuits, x86 Processor Assembly Language and Computer Architecture."
+        description: "Enrolled at a local college to finish transfer coursework. Planned coursework includes Calculus III-IV, Physics (Mechanics, Electricity and Magnetism, Fliuds, Waves, Optics, and Thermodynamics), Differential Equations, Linear Alegbra, Discrete, Circuits, x86 Processor Assembly Language and Computer Architecture."
     }
 };
+const pixelsPerMonth = 12;
+const timelineStart = new Date("2022-01-01T00:00:00");
+const timelineProgress = document.querySelector("#timeline-progress");
+const presentLabel = document.querySelector("#timeline-present-label");
+
+
+function getTimelinePosition(dataString) {
+    const date = dataString === "present" ? new Date() : new Date(`${dataString}-01T00:00:00`);
+
+    const months =
+        (date.getFullYear() - timelineStart.getFullYear()) * 12 +
+        (date.getMonth() - timelineStart.getMonth());
+
+    return months * pixelsPerMonth;
+}
+
+function updateTimelineProgress() {
+    presentLabel.classList.remove("is-lit");
+
+    const selectedMarker = [...markers].find(
+        (marker) => marker.dataset.event === selectedEvent
+    );
+
+    if (!selectedMarker) {
+        timelineProgress.style.height = "0px";
+        return;
+    }
+
+    let startPosition;
+    let endPosition;
+
+    if (selectedMarker.dataset.type === "moment") {
+        const position = getTimelinePosition(selectedMarker.dataset.date);
+        startPosition = position + selectedMarker.offsetHeight / 2 - 8;
+        endPosition = startPosition + 16;
+    }
+    else {
+        startPosition = getTimelinePosition(selectedMarker.dataset.start) + (selectedMarker.offsetHeight / 2);
+        endPosition = getTimelinePosition(selectedMarker.dataset.end) + (selectedMarker.offsetHeight / 2);
+    }
+
+    timelineProgress.style.transition = "none";
+    timelineProgress.style.top = `${startPosition}px`;
+    timelineProgress.style.height = "0px";
+
+    timelineProgress.offsetHeight;
+
+    timelineProgress.style.transition = "height 0.8s ease";
+    timelineProgress.style.height = `${Math.max(0, endPosition - startPosition)}px`;
+}
+
+function positionMarkers() {
+    markers.forEach((marker) => {
+        const date = marker.dataset.type === "moment" ? marker.dataset.date : marker.dataset.start;
+        marker.style.top = `${getTimelinePosition(date)}px`;
+    });
+
+    const lastMarker = markers[markers.length - 1];
+    document.querySelector("#timeline").style.height = `${getTimelinePosition(lastMarker.dataset.type === "moment" ? lastMarker.dataset.date : lastMarker.dataset.start) + 20}px`;
+}
+
+
+presentLabel.style.top = `${getTimelinePosition("present") + 24}px`;
+positionMarkers();
+timelineProgress.addEventListener("transitionend", (transitionEvent) => {
+    if (transitionEvent.propertyName !== "height") return;
+
+    const selectedMarker = [...markers].find (
+        marker => marker.dataset.event === selectedEvent
+    );
+
+    if (selectedMarker?.dataset.end === "present") {
+        presentLabel.classList.add("is-lit");
+    }
+});
 
 
 markers.forEach((marker) => {
@@ -45,6 +117,8 @@ markers.forEach((marker) => {
         markers.forEach((marker) => {
             marker.classList.toggle("active", marker.dataset.event === selectedEvent);
         });
+
+        updateTimelineProgress();
 
         if (selectedEvent === null) {
             detailsPanel.innerHTML = timelinePlaceholderText;
