@@ -12,7 +12,7 @@ const eventInfo = {
         description: "As a researcher, I worked on finding soltuion at the intersection of arts and technology. After gainging insights from meetings with specialists, our team presented our finalized idea to a panel of judges. Although we didn't win anything, this was my first introduction to researching and working with a team to ideate a viable product."
     },
     vex: {
-        title: "VEX IQ Robotics",
+        title: "VEX IQ Robotics Team ***",
         description: "Starting a rookie community team, I led us to win 13 awards, including the *** State Chapionships and qualifying for the World Championship. I introduced and taught programing concepts and mechanical skills to members and ideated with them to create our robot. Additionally, I worked in high-pressure situations as a main robot driver, often taking the lead in quick decisions."
     },
     dualEnrollment: {
@@ -20,7 +20,7 @@ const eventInfo = {
         description: "Coursework: Intro to Biology, Programming in C++, Programming in Python, Pre-Calculus, Intro to Physics, and Calculus I-II"
     },
     frc: {
-        title: "FIRST Robotics Competition",
+        title: "FIRST Robotics Competition Team ***",
         description: "Developed and maintained robot software for competition using Java and WPILib. I also utilized advanced control system (vision processing, object detection, etc.) to automate controls and paths. Team accomplishments include competing in quarter-finals during the 2026 NorCal District Championships and advancing to the World Championship in 2025 and 2026."
     },
     hiset: {
@@ -30,7 +30,7 @@ const eventInfo = {
     },
     deAnza: {
         title: "*** Community College",
-        description: "Enrolled at a local college to finish transfer coursework. Planned coursework includes Calculus III-IV, Physics (Mechanics, Electricity and Magnetism, Fliuds, Waves, Optics, and Thermodynamics), Differential Equations, Linear Alegbra, Discrete, Circuits, x86 Processor Assembly Language and Computer Architecture."
+        description: "Enrolled at a local college to finish transfer coursework. Planned coursework includes Calculus III-IV, Physics (Mechanics, Electricity and Magnetism, Fluids, Waves, Optics, and Thermodynamics), Differential Equations, Linear Alegbra, Discrete, Circuits, x86 Processor Assembly Language and Computer Architecture."
     }
 };
 const pixelsPerMonth = 12;
@@ -47,6 +47,18 @@ function getTimelinePosition(dataString) {
         (date.getMonth() - timelineStart.getMonth());
 
     return months * pixelsPerMonth;
+}
+
+function formatTimelineDate(dataString) {
+    if (dataString === "present") return "Present";
+
+    const [year, month] = dataString.split("-");
+    const date = new Date(Number(year), Number(month) - 1);
+
+    return date.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric"
+    });
 }
 
 function updateTimelineProgress() {
@@ -125,12 +137,27 @@ markers.forEach((marker) => {
         }
         else {
             const info = eventInfo[selectedEvent];
+
+            const isMoment = marker.dataset.type === "moment";
+
+            const startDate = isMoment ? marker.dataset.date : marker.dataset.start;
+            const endDate = isMoment ? null : marker.dataset.end;
+
+            const dateText = isMoment ? formatTimelineDate(startDate) : `${formatTimelineDate(startDate)} - ${formatTimelineDate(endDate)}`;
+
             detailsPanel.innerHTML = `
-                <h3>${info.title}</h3>
-                <p>${info.description}</p>
+                <div class="timeline-details-content">
+                    <div class="timeline-details-main">
+                        <h3>${info.title}</h3>
+                        <p>${info.description}</p>
+                    </div>
+                    <span class="timeline-event-dates">${dateText}</span>
+                </div>
             `;
         }
 
         console.log(selectedEvent);
     });
 });
+
+document.body.style.paddingBottom = "300px";

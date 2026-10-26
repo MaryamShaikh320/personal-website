@@ -19,6 +19,10 @@ h2 {
     margin: 0;
 }
 
+h3 {
+    font-size: 2.5rem;
+}
+
 p.hero-section {
     font-size: 1.75rem;
 }
@@ -55,7 +59,7 @@ header {
     transition: color 0.2s ease;
 }
 
-.nav-links {
+/* .nav-links {
     display: flex;
     gap: 2.5rem;
     list-style: none;
@@ -72,7 +76,7 @@ header {
 
 .nav-links a:hover {
     color: #7A8CA6;
-}
+} */
 
 
 main {
@@ -183,8 +187,8 @@ main {
 .timeline-details {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 25rem;
+    justify-content: flex-start;
+    height: 27rem;
     width: 50rem;
     overflow-y: auto;
     padding: 1.5rem;
@@ -266,10 +270,69 @@ main {
     --max-opacity: 0.5;
     animation: riseFadeIn 1s ease-in both;
     color: #C4D2E1;
+    margin: auto;
+    text-align: center;
     /* border: 0.06rem solid rgba(169, 199, 255, 0.25);
     border-radius: 1rem;
     background: rgba(85, 115, 146, 0.08); */
 }
+
+.timeline-details-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
+
+.timeline-details-main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+}
+
+.timeline-event-dates {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    align-self: end;
+
+    white-space: nowrap;
+    color: #a9c7ff;
+    font-size: 1rem;
+    opacity: 0.8;
+
+    animation: riseFadeIn 1s ease-in both;
+    animation-delay: 0.16s;
+}
+
+/* .timeline-details-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+.timeline-details-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.timeline-details-dates {
+    align-self: flex-end;
+    margin-top: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+    color: #a9c7ff;
+    font-size: 0.8rem;
+    opacity: 0.8;
+} */
 
 #timeline-progress {
     position: absolute;
