@@ -367,3 +367,64 @@ main {
     color: #a9c7ff;
     text-shadow: 0 0 0.6rem #557392;
 }
+
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    /* border: 0.5rem solid rgba(255, 255, 255); */
+    margin-top: 15rem;
+    overflow: hidden;
+}
+
+.projects-container h2 {
+    text-align: center;
+}
+
+.projects-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 8rem) / 3);
+    gap: 4rem;
+
+    width: 90%;
+    margin: 2rem auto 0;
+    /* border: 0.2rem solid rgba(255, 255, 0); */
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    /* border: 0.2rem solid rgb(66, 60, 225); */
+    height: auto;
+    /* box shadow in first card looks different at the top b/c of color theory, not broken code*/
+    box-shadow: 0 0.25rem 1.5rem #557392;
+    border-radius: 1.25rem;
+}
+
+.project-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    border-radius: 1.25rem;
+}
+
+.card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+}
