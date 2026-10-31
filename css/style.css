@@ -1,6 +1,6 @@
 body {
     background-color: #00001C;
-    color: #F2F6FB;
+    color: #C4D2E1;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -121,14 +121,14 @@ main {
     align-items: center;
     width: 2.2rem;
     height: 3.14rem;
-    border: 0.125rem solid rgba(255, 255, 255, 0.8);
+    border: 0.125rem solid #C4D2E1;
     border-radius: 1.6rem;
 }
 
 .moving-dot {
     width: 0.625rem;
     height: 0.625rem;
-    background-color: #ffffff;
+    background-color: #C4D2E1;
     border-radius: 50%;
     animation: scrollDown 2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
 }
@@ -375,27 +375,30 @@ main {
     /* border: 0.5rem solid rgba(255, 255, 255); */
     margin-top: 15rem;
     overflow: hidden;
+    text-align: center;
 }
 
-.projects-container h2 {
-    text-align: center;
+.projects-container span {
+    font-size: 1rem;
+    opacity: 0.5;
 }
 
 .projects-grid {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: calc((100% - 8rem) / 3);
+    align-items: start;
     gap: 4rem;
 
     width: 90%;
-    margin: 2rem auto 0;
+    margin: 0 auto 0;
     /* border: 0.2rem solid rgba(255, 255, 0); */
 
     overflow-x: auto;
     overflow-y: hidden;
 
     box-sizing: border-box;
-    padding: 2rem;
+    padding: 3.5rem 2rem 2rem;
 }
 
 .project-card {
@@ -406,6 +409,11 @@ main {
     /* box shadow in first card looks different at the top b/c of color theory, not broken code*/
     box-shadow: 0 0.25rem 1.5rem #557392;
     border-radius: 1.25rem;
+}
+
+.project-card:hover {
+    transform: translateY(-1.5rem);
+    box-shadow: 0 0.25rem 2rem #A1B2C4;
 }
 
 .project-card img {
@@ -421,10 +429,39 @@ main {
     text-align: center;
 }
 
+.card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.card-footer a {
+    color: #7A8CA6;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    text-underline-offset: 0.2rem;
+    text-decoration-thickness: 0.01rem;
+}
+
+.card-footer a:hover {
+    color: #C2D2E1;
+}
+
 .project-card h3 {
     font-size: 1.5rem;
 }
 
 .project-card p {
     font-size: 1rem;
+}
+
+
+.projects-grid::-webkit-scrollbar {
+    width: 10px;
+}
+
+.projects-grid::-webkit-scrollbar-track {
+    background: transparent;
 }
