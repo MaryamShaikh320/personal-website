@@ -8,19 +8,19 @@ const timelinePlaceholderText = `
 let selectedEvent = null;
 const eventInfo = {
     fll: {
-        title: "FIRST Lego League Team ***",
+        title: "FIRST Lego League Team 26361 The Roboclaws",
         description: "As a researcher, I worked on finding soltuion at the intersection of arts and technology. After gainging insights from meetings with specialists, our team presented our finalized idea to a panel of judges. Although we didn't win anything, this was my first introduction to researching and working with a team to ideate a viable product."
     },
     vex: {
-        title: "VEX IQ Robotics Team ***",
-        description: "Starting a rookie community team, I led us to win 13 awards, including the *** State Chapionships and qualifying for the World Championship. I introduced and taught programing concepts and mechanical skills to members and ideated with them to create our robot. Additionally, I worked in high-pressure situations as a main robot driver, often taking the lead in quick decisions."
+        title: "VEX IQ Robotics Team 863A Quasar",
+        description: "Starting a rookie community team, I led us to win 13 awards, including the New Jersey State Chapionships and qualifying for the World Championship. I introduced and taught programing concepts and mechanical skills to members and ideated with them to create our robot. Additionally, I worked in high-pressure situations as a main robot driver, often taking the lead in quick decisions."
     },
     dualEnrollment: {
         title: "Dual Enrollment at De Anza",
-        description: "Coursework: Intro to Biology, Programming in C++, Programming in Python, Pre-Calculus, Intro to Physics, and Calculus I-II"
+        description: "Coursework: Intro to Biology, Programming in C++, Programming in Python, Data Structures and Algorithms, Pre-Calculus, Intro to Physics, and Calculus I-II"
     },
     frc: {
-        title: "FIRST Robotics Competition Team ***",
+        title: "FIRST Robotics Competition Team 3501 The Firebots",
         description: "Developed and maintained robot software for competition using Java and WPILib. I also utilized advanced control system (vision processing, object detection, etc.) to automate controls and paths. Team accomplishments include competing in quarter-finals during the 2026 NorCal District Championships and advancing to the World Championship in 2025 and 2026."
     },
     hiset: {
@@ -29,7 +29,7 @@ const eventInfo = {
 
     },
     deAnza: {
-        title: "*** Community College",
+        title: "De Anza Community College",
         description: "Enrolled at a local college to finish transfer coursework. Planned coursework includes Calculus III-IV, Physics (Mechanics, Electricity and Magnetism, Fluids, Waves, Optics, and Thermodynamics), Differential Equations, Linear Alegbra, Discrete, Circuits, x86 Processor Assembly Language and Computer Architecture."
     }
 };
@@ -37,6 +37,7 @@ const pixelsPerMonth = 12;
 const timelineStart = new Date("2022-01-01T00:00:00");
 const timelineProgress = document.querySelector("#timeline-progress");
 const presentLabel = document.querySelector("#timeline-present-label");
+const navLinks = document.querySelectorAll(".nav-links a");
 
 
 function getTimelinePosition(dataString) {
@@ -159,5 +160,23 @@ markers.forEach((marker) => {
         console.log(selectedEvent);
     });
 });
+
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    });
+});
+
 
 document.body.style.paddingBottom = "300px";
