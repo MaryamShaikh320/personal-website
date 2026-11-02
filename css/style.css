@@ -113,6 +113,7 @@ main {
     margin: 0 7.5rem;
 }
 
+/* game stoof */
 #game-mode-button {
     position: fixed;
     top: 7rem;
@@ -143,6 +144,16 @@ main {
     box-shadow: 0 0 0.5rem 0.2rem #557392;
 }
 
+.random-platform {
+    position: absolute;
+    width: 8rem;
+    height: 0.5rem;
+    background-color: cadetblue;
+    border-radius: 1rem;
+}
+
+
+/* hero stoof */
 .hero-container {
     position: relative;
     display: flex;

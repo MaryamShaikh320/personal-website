@@ -42,14 +42,14 @@ const navLinks = document.querySelectorAll(".nav-links a");
 
 const gameModeButton = document.getElementById("game-mode-button");
 let gameModeActive = false;
-const platforms = document.querySelectorAll(".platform");
+const platforms = document.querySelectorAll(".platform, .random-platform");
 let playerX = 6.25;
 let playerY = 12.25;
 let movingLeft = false;
 let movingRight = false;
 let velocityY = 0;
-const gravity = 0.02;
-const jumpStrength = -0.75;
+const gravity = 0.06;
+const jumpStrength = -1.4;
 const playerSize = 1.9;
 const floorOffset = 3;
 let isGrounded = false;
@@ -85,6 +85,8 @@ function gameLoop() {
         const playerTop = playerY * rem;
         const playerBottom = playerTop + playerSize * rem;
 
+        const platforms = document.querySelectorAll(".platform, .random-platform");
+
         platforms.forEach((platform) => {
             const rect = platform.getBoundingClientRect();
 
@@ -113,7 +115,23 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
-console.log(gameModeActive);
+
+function createPlatform() {
+    const platform = document.createElement("div");
+
+    platform.classList.add("random-platform");
+
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+    const randomX = Math.random() * (window.innerWidth / rem - 8);
+    const randomY = Math.random() * (document.documentElement.scrollHeight / rem);
+
+    platform.style.left = randomX + "rem";
+    platform.style.top = randomY + "rem";
+
+    document.body.appendChild(platform);
+}
+
 function getTimelinePosition(dataString) {
     const date = dataString === "present" ? new Date() : new Date(`${dataString}-01T00:00:00`);
 
@@ -264,11 +282,18 @@ gameModeButton.addEventListener("click", () => {
         gameModeButton.style.borderColor = 'cadetblue';
         player.style.top = playerY + 'rem';
         player.style.left = playerX + 'rem';
+
+        for (let i = 0; i < 10; i++) {
+            createPlatform();
+        }
     }
     else {
         player.style.display = 'none';
         gameModeButton.style.color = '#7A8CA6';
         gameModeButton.style.borderColor = '#7A8CA6';
+        document.querySelectorAll(".random-platform").forEach((platform) => {
+            platform.remove();
+        });
     }
 });
 
