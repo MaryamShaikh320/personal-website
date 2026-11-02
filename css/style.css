@@ -1,10 +1,11 @@
 body {
     background-color: #00001C;
-    color: #F2F6FB;
+    color: #C4D2E1;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
     font-family: 'Jura', sans-serif;
+    min-height: 100vh;
 }
 
 h1 {
@@ -27,7 +28,9 @@ p.hero-section {
     font-size: 1.75rem;
 }
 
-p, ul, span {
+p,
+ul,
+span {
     font-size: 1.5rem;
 }
 
@@ -36,7 +39,10 @@ p, ul, span {
 }
 
 
-header {
+.portfolio-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: #00001C;
     padding: 0.9rem;
     margin: 0;
@@ -44,11 +50,17 @@ header {
 }
 
 .navbar {
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
     gap: 5rem;
     align-items: center;
-    padding: 0 2.5rem;
+    padding: 0 2.5rem; */
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
 }
 
 .site-name a {
@@ -59,9 +71,9 @@ header {
     transition: color 0.2s ease;
 }
 
-/* .nav-links {
+.nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -76,13 +88,72 @@ header {
 
 .nav-links a:hover {
     color: #7A8CA6;
-} */
+}
 
+.external-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0 2rem 0 0;
+    padding: 0;
+}
+
+.external-links a {
+    text-decoration: none;
+    color: #C4D2E1;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    background-color: #05113681;
+    border: 0.1rem solid #344660;
+    border-radius: 1rem;
+    padding: 0.4rem;
+}
 
 main {
     margin: 0 7.5rem;
 }
 
+/* game stoof */
+#game-mode-button {
+    position: fixed;
+    top: 7rem;
+    left: 3rem;
+    z-index: 1000;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #7A8CA6;
+    color: #7A8CA6;
+}
+
+#game-mode-button:hover {
+    cursor: pointer;
+    border-color:cadetblue;
+    color:cadetblue;
+}
+
+#player {
+    display: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    position: absolute;
+    z-index: 999;
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    box-shadow: 0 0 0.5rem 0.2rem #557392;
+}
+
+.random-platform {
+    position: absolute;
+    width: 8rem;
+    height: 0.5rem;
+    background-color: cadetblue;
+    border-radius: 1rem;
+}
+
+
+/* hero stoof */
 .hero-container {
     position: relative;
     display: flex;
@@ -94,7 +165,7 @@ main {
     gap: 1.9rem;
 }
 
-.hero-container .hero-content-box {
+/* .hero-container .hero-content-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,13 +174,15 @@ main {
     box-shadow: 0 0.25rem 6.25rem #557392;
     border-radius: 1.25rem;
     padding: 4rem;
-}
+} */
 
 .hero-container p {
     margin: 0;
     max-width: 46.9rem;
     text-align: center;
 }
+
+
 
 .scroll-indicator {
     position: absolute;
@@ -121,14 +194,14 @@ main {
     align-items: center;
     width: 2.2rem;
     height: 3.14rem;
-    border: 0.125rem solid rgba(255, 255, 255, 0.8);
+    border: 0.125rem solid #C4D2E1;
     border-radius: 1.6rem;
 }
 
 .moving-dot {
     width: 0.625rem;
     height: 0.625rem;
-    background-color: #ffffff;
+    background-color: #C4D2E1;
     border-radius: 50%;
     animation: scrollDown 2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
 }
@@ -188,7 +261,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 27rem;
+    height: 30rem;
     width: 50rem;
     overflow-y: auto;
     padding: 1.5rem;
@@ -244,6 +317,7 @@ main {
         opacity: 0.1;
         transform: translateY(var(--max-translation, 2rem));
     }
+
     to {
         opacity: var(--max-opacity, 1);
         transform: translateY(0);
@@ -366,4 +440,107 @@ main {
 #timeline-present-label.is-lit {
     color: #a9c7ff;
     text-shadow: 0 0 0.6rem #557392;
+}
+
+
+#projects-container {
+    display: flex;
+    flex-direction: column;
+    /* border: 0.5rem solid rgba(255, 255, 255); */
+    margin-top: 15rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+#projects-container h2 {
+    width: fit-content;
+    align-self: center;
+}
+
+#projects-container span {
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+.projects-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 8rem) / 3);
+    align-items: start;
+    gap: 4rem;
+
+    width: 90%;
+    margin: 0 auto 0;
+    /* border: 0.2rem solid rgba(255, 255, 0); */
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    box-sizing: border-box;
+    padding: 3.5rem 2rem 2rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    /* border: 0.2rem solid rgb(66, 60, 225); */
+    height: auto;
+    /* box shadow in first card looks different at the top b/c of color theory, not broken code*/
+    box-shadow: 0 0.25rem 1.5rem #557392;
+    border-radius: 1.25rem;
+}
+
+.project-card:hover {
+    transform: translateY(-1.5rem);
+    box-shadow: 0 0.25rem 2rem #A1B2C4;
+}
+
+.project-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    border-radius: 1.25rem;
+}
+
+.card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.card-footer a {
+    color: #7A8CA6;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    text-underline-offset: 0.2rem;
+    text-decoration-thickness: 0.01rem;
+}
+
+.card-footer a:hover {
+    color: #C2D2E1;
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+}
+
+
+.projects-grid::-webkit-scrollbar {
+    width: 10px;
+}
+
+.projects-grid::-webkit-scrollbar-track {
+    background: transparent;
 }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initital-sclae=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Personal Website</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
@@ -16,22 +16,28 @@
     <header class="portfolio-header">
         <nav class="navbar">
             <div class="site-name"><a href="#">Maryam Shaikh</a></div>
-            <!-- <ul class="nav-links">
-                <li><a href="#">Education</a></li>
-                <li><a href="#">Experience</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Technical Skills</a></li>
-            </ul> -->
+            <ul class="nav-links">
+                <li><a href="#timeline-section">My Journey</a></li>
+                <li><a href="#projects-container">Projects</a></li>
+            </ul>
+            <ul class="external-links">
+                <li><a href="https://www.linkedin.com/in/maryam-shaikh-924867403/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a></li>
+                <li><a href="https://github.com/MaryamShaikh320" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></li>
+                <li><a href="about:blank" target="_blank" rel="noopener noreferrer">RESUME ↗</a></li>
+            </ul>
         </nav>
     </header>
 
     <main class="portfolio-main">
+        <button id="game-mode-button">Game Mode</button>
+        <div id="player"></div>
+
         <div class="hero-container">
             <section class="hero-content-box">
-                <h1>hi, i'm maryam</h1>
+                <h1 class="platform">hi, i'm maryam</h1>
                 <p class="hero-section">
-                    a 16-year-old high school graduate studying computer engineering at ***. I'm also a part of
-                    FRC Team ***. My interests lie in robotics, computer vision, and AI/ML that I explore
+                    an accelerated high school graduate studying computer engineering at De Anza College. I'm also a part of
+                    FRC Team 3501. My interests lie in robotics, computer vision, and AI/ML that I explore
                     through personal projects. Oh, I'm also a big reader.
                 </p>
             </section>
@@ -45,13 +51,18 @@
                 <section id="timeline-section">
                     <div id="timeline">
                         <div id="timeline-progress"></div>
-
-                        <button class="marker" data-event="fll" data-type="duration" data-start="2022-09" data-end="2023-01" aria-label="FIRST Lego League Team"></button>
-                        <button class="marker" data-event="vex" data-type="duration" data-start="2023-11" data-end="2024-04" aria-label="VEX Robotics"></button>
-                        <button class="marker" data-event="dualEnrollment" data-type="duration" data-start="2024-09" data-end="2026-06" aria-label="Dual Enrollment"></button>
-                        <button class="marker" data-event="frc" data-type="duration" data-start="2024-08" data-end="present" aria-label="FIRST Robotics Competition Team"></button>
-                        <button class="marker" data-event="hiset" data-type="moment" data-date="2026-06" aria-label="HiSET Exit"></button>
-                        <button class="marker" data-event="deAnza" data-type="duration" data-start="2026-09" data-end="present" aria-label="De Anza College"></button>
+                        <button class="marker" data-event="fll" data-type="duration" data-start="2022-09"
+                            data-end="2023-01" aria-label="FIRST Lego League Team"></button>
+                        <button class="marker" data-event="vex" data-type="duration" data-start="2023-11"
+                            data-end="2024-04" aria-label="VEX Robotics"></button>
+                        <button class="marker" data-event="dualEnrollment" data-type="duration" data-start="2024-09"
+                            data-end="2026-06" aria-label="Dual Enrollment"></button>
+                        <button class="marker" data-event="frc" data-type="duration" data-start="2024-08"
+                            data-end="present" aria-label="FIRST Robotics Competition Team"></button>
+                        <button class="marker" data-event="hiset" data-type="moment" data-date="2026-06"
+                            aria-label="HiSET Exit"></button>
+                        <button class="marker" data-event="deAnza" data-type="duration" data-start="2026-09"
+                            data-end="present" aria-label="De Anza College"></button>
                         <div id="timeline-present-label">PRESENT</div>
                     </div>
                     <div class="timeline-details" aria-live="polite">
@@ -60,6 +71,55 @@
                 </section>
             </div>
         </div>
+
+        <sectiton id="projects-container">
+            <h2 class="platform">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="assests/object-detection.png" alt="object detection. (Not my image. Source: devpost)">
+                    <div class="card-body">
+                        <h3 class="platform">(^Not my image) Ball-Tracker</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/MaryamShaikh320/BallTracking-MiniProject" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assests/coming-soon.png">
+                    <div class="card-body">
+                        <h3 class="platform">Coming Soon</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/MaryamShaikh320/BallTracking-MiniProject" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assests/coming-soon.png">
+                    <div class="card-body">
+                        <h3 class="platform">Coming Soon</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/MaryamShaikh320/BallTracking-MiniProject" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <span>← Scroll →</span> -->
+            </section>
     </main>
 </body>
 
