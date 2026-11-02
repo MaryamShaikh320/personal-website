@@ -199,6 +199,40 @@ function positionMarkers() {
     document.querySelector("#timeline").style.height = `${getTimelinePosition(lastMarker.dataset.type === "moment" ? lastMarker.dataset.date : lastMarker.dataset.start) + 20}px`;
 }
 
+function selectEvent(marker) {
+    selectedEvent = marker.dataset.event;
+
+    markers.forEach((marker) => {
+        marker.classList.toggle("active", marker.dataset.event === selectedEvent);
+    });
+
+    updateTimelineProgress();
+
+    if (selectedEvent === null) {
+        detailsPanel.innerHTML = timelinePlaceholderText;
+    }
+    else {
+        const info = eventInfo[selectedEvent];
+
+        const isMoment = marker.dataset.type === "moment";
+
+        const startDate = isMoment ? marker.dataset.date : marker.dataset.start;
+        const endDate = isMoment ? null : marker.dataset.end;
+
+        const dateText = isMoment ? formatTimelineDate(startDate) : `${formatTimelineDate(startDate)} - ${formatTimelineDate(endDate)}`;
+
+        detailsPanel.innerHTML = `
+            <div class="timeline-details-content">
+                <div class="timeline-details-main">
+                    <h3 class="platform">${info.title}</h3>
+                    <p>${info.description}</p>
+                </div>
+                <span class="timeline-event-dates">${dateText}</span>
+            </div>
+        `;
+    }
+}
+
 gameLoop();
 
 presentLabel.style.top = `${getTimelinePosition("present") + 24}px`;
@@ -218,39 +252,16 @@ timelineProgress.addEventListener("transitionend", (transitionEvent) => {
 
 markers.forEach((marker) => {
     marker.addEventListener("click", function () {
-        selectedEvent = selectedEvent === marker.dataset.event ? null : marker.dataset.event;
+        if (selectedEvent === marker.dataset.event) {
+            selectedEvent = null;
 
-        markers.forEach((marker) => {
-            marker.classList.toggle("active", marker.dataset.event === selectedEvent);
-        });
+            marker.classList.remove("active");
 
-        updateTimelineProgress();
-
-        if (selectedEvent === null) {
             detailsPanel.innerHTML = timelinePlaceholderText;
+
+            updateTimelineProgress();
         }
-        else {
-            const info = eventInfo[selectedEvent];
-
-            const isMoment = marker.dataset.type === "moment";
-
-            const startDate = isMoment ? marker.dataset.date : marker.dataset.start;
-            const endDate = isMoment ? null : marker.dataset.end;
-
-            const dateText = isMoment ? formatTimelineDate(startDate) : `${formatTimelineDate(startDate)} - ${formatTimelineDate(endDate)}`;
-
-            detailsPanel.innerHTML = `
-                <div class="timeline-details-content">
-                    <div class="timeline-details-main">
-                        <h3 class="platform">${info.title}</h3>
-                        <p>${info.description}</p>
-                    </div>
-                    <span class="timeline-event-dates">${dateText}</span>
-                </div>
-            `;
-        }
-
-        console.log(selectedEvent);
+        else { selectEvent(marker) }
     });
 });
 
@@ -322,11 +333,14 @@ document.addEventListener("keyup", (e) => {
 document.addEventListener("keydown", (e) => {
     e.preventDefault();
 
-    if (e.code === "Space" && gameModeActive && isGrounded) {
+    if (e.code === "ArrowUp" && gameModeActive && isGrounded) {
         velocityY = jumpStrength;
         isGrounded = false;
     }
 });
 
+if (markers.length > 0) {
+    selectEvent(markers[0]);
+}
 
 document.body.style.paddingBottom = "100px";
