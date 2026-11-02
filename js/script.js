@@ -37,9 +37,83 @@ const pixelsPerMonth = 12;
 const timelineStart = new Date("2022-01-01T00:00:00");
 const timelineProgress = document.querySelector("#timeline-progress");
 const presentLabel = document.querySelector("#timeline-present-label");
+
 const navLinks = document.querySelectorAll(".nav-links a");
 
+const gameModeButton = document.getElementById("game-mode-button");
+let gameModeActive = false;
+const platforms = document.querySelectorAll(".platform");
+let playerX = 6.25;
+let playerY = 12.25;
+let movingLeft = false;
+let movingRight = false;
+let velocityY = 0;
+const gravity = 0.02;
+const jumpStrength = -0.75;
+const playerSize = 1.9;
+const floorOffset = 3;
+let isGrounded = false;
 
+const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+function gameLoop() {
+    if (gameModeActive) {
+        if (movingRight) {
+            playerX += 0.2;
+        }
+
+        if (movingLeft) {
+            playerX -= 0.2;
+        }
+
+        velocityY += gravity;
+        playerY += velocityY;
+
+        const floorY = (document.documentElement.scrollHeight / rem) - floorOffset - playerSize;
+
+        if (playerY >= floorY) {
+            playerY = floorY;
+            velocityY = 0;
+            isGrounded = true;
+        }
+        else {
+            isGrounded = false;
+        } 
+
+        const playerLeft = playerX * rem;
+        const playerRight = playerLeft + playerSize * rem;
+        const playerTop = playerY * rem;
+        const playerBottom = playerTop + playerSize * rem;
+
+        platforms.forEach((platform) => {
+            const rect = platform.getBoundingClientRect();
+
+            const platformLeft = rect.left + window.scrollX;
+            const platformRight = rect.right + window.scrollX;
+            const platformTop = rect.top + window.scrollY;
+
+            if (playerRight > platformLeft && playerLeft < platformRight) {
+                if (
+                    velocityY > 0 &&
+                    playerBottom >= platformTop &&
+                    playerTop < platformTop
+                ) {
+                    playerY = platformTop / rem - playerSize;
+                    velocityY = 0;
+                    isGrounded = true;
+                }
+            }
+        });
+
+
+
+        player.style.left = playerX + 'rem';
+        player.style.top = playerY + 'rem';
+    }
+
+    requestAnimationFrame(gameLoop);
+}
+console.log(gameModeActive);
 function getTimelinePosition(dataString) {
     const date = dataString === "present" ? new Date() : new Date(`${dataString}-01T00:00:00`);
 
@@ -107,6 +181,7 @@ function positionMarkers() {
     document.querySelector("#timeline").style.height = `${getTimelinePosition(lastMarker.dataset.type === "moment" ? lastMarker.dataset.date : lastMarker.dataset.start) + 20}px`;
 }
 
+gameLoop();
 
 presentLabel.style.top = `${getTimelinePosition("present") + 24}px`;
 positionMarkers();
@@ -149,7 +224,7 @@ markers.forEach((marker) => {
             detailsPanel.innerHTML = `
                 <div class="timeline-details-content">
                     <div class="timeline-details-main">
-                        <h3>${info.title}</h3>
+                        <h3 class="platform">${info.title}</h3>
                         <p>${info.description}</p>
                     </div>
                     <span class="timeline-event-dates">${dateText}</span>
@@ -178,5 +253,55 @@ navLinks.forEach(link => {
     });
 });
 
+gameModeButton.addEventListener("click", () => {
+    gameModeActive = !gameModeActive;
 
-document.body.style.paddingBottom = "300px";
+    gameModeButton.blur();
+
+    if (gameModeActive) {
+        player.style.display = 'block';
+        gameModeButton.style.color = 'cadetblue';
+        gameModeButton.style.borderColor = 'cadetblue';
+        player.style.top = playerY + 'rem';
+        player.style.left = playerX + 'rem';
+    }
+    else {
+        player.style.display = 'none';
+        gameModeButton.style.color = '#7A8CA6';
+        gameModeButton.style.borderColor = '#7A8CA6';
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+        movingLeft = true;
+    }
+
+    if (e.key === "ArrowRight") {
+        movingRight = true;
+    }
+
+    console.log(e.key);
+});
+
+document.addEventListener("keyup", (e) => {
+    if (e.key === "ArrowLeft") {
+        movingLeft = false;
+    }
+
+    if (e.key === "ArrowRight") {
+        movingRight = false;
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    e.preventDefault();
+
+    if (e.code === "Space" && gameModeActive && isGrounded) {
+        velocityY = jumpStrength;
+        isGrounded = false;
+    }
+});
+
+
+document.body.style.paddingBottom = "100px";

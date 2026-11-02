@@ -5,6 +5,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     font-family: 'Jura', sans-serif;
+    min-height: 100vh;
 }
 
 h1 {
@@ -27,7 +28,9 @@ p.hero-section {
     font-size: 1.75rem;
 }
 
-p, ul, span {
+p,
+ul,
+span {
     font-size: 1.5rem;
 }
 
@@ -36,7 +39,10 @@ p, ul, span {
 }
 
 
-header {
+.portfolio-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: #00001C;
     padding: 0.9rem;
     margin: 0;
@@ -107,6 +113,36 @@ main {
     margin: 0 7.5rem;
 }
 
+#game-mode-button {
+    position: fixed;
+    top: 7rem;
+    left: 3rem;
+    z-index: 1000;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #7A8CA6;
+    color: #7A8CA6;
+}
+
+#game-mode-button:hover {
+    cursor: pointer;
+    border-color:cadetblue;
+    color:cadetblue;
+}
+
+#player {
+    display: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    position: absolute;
+    z-index: 999;
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    box-shadow: 0 0 0.5rem 0.2rem #557392;
+}
+
 .hero-container {
     position: relative;
     display: flex;
@@ -118,7 +154,7 @@ main {
     gap: 1.9rem;
 }
 
-.hero-container .hero-content-box {
+/* .hero-container .hero-content-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -127,13 +163,15 @@ main {
     box-shadow: 0 0.25rem 6.25rem #557392;
     border-radius: 1.25rem;
     padding: 4rem;
-}
+} */
 
 .hero-container p {
     margin: 0;
     max-width: 46.9rem;
     text-align: center;
 }
+
+
 
 .scroll-indicator {
     position: absolute;
@@ -268,6 +306,7 @@ main {
         opacity: 0.1;
         transform: translateY(var(--max-translation, 2rem));
     }
+
     to {
         opacity: var(--max-opacity, 1);
         transform: translateY(0);
@@ -400,6 +439,11 @@ main {
     margin-top: 15rem;
     overflow: hidden;
     text-align: center;
+}
+
+#projects-container h2 {
+    width: fit-content;
+    align-self: center;
 }
 
 #projects-container span {
